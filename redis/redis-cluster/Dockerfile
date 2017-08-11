@@ -6,7 +6,6 @@ RUN set -x  && \
     yum install -y wget && \
     yum groupinstall -y "Development Tools" && \
     yum install -y ruby && \
-    yum install -y rubygems && \
     wget http://download.redis.io/releases/redis-3.0.0.tar.gz && \
     mkdir -p /usr/local && \
     tar -xzvf redis-3.0.0.tar.gz -C /usr/local/ && \
@@ -41,6 +40,5 @@ RUN set -x  && \
 
 COPY entry-point.sh /usr/local/bin/entry-point.sh
 RUN chmod +x /usr/local/bin/entry-point.sh
-RUN wget https://rubygems.global.ssl.fastly.net/gems/redis-3.2.1.gem && gem install -l ./redis-3.2.1.gem
 ENTRYPOINT ["/usr/local/bin/entry-point.sh"]
 
