@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+    # https://hub.docker.com/_/zookeeper/
+    zookeeper:
+        image: zookeeper:3.4.9
+        restart: always
+        ports:
+            - 2181:2181
+        volumes:
+        environment:
+            ZOO_MY_ID: 1
+            #ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+        mem_limit: 1000m
+        volumes:
+          - $PWD/docker_app_data/zookeeper/data:/data
+          - $PWD/docker_app_data/zookeeper/datalog:/datalog
+
+    # https://github.com/sekka1/kafka
+    kafka:
+        image: garland/kafka:dev
+        restart: always
+        ports:
+            - 9092:9092
+        mem_limit: 1000m
+        volumes:
+          - $PWD/docker_app_data/kafka/kafka-logs:/tmp/kafka-logs
